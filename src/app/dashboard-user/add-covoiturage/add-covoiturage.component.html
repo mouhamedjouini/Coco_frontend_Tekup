@@ -46,17 +46,29 @@
                                                         <label>Ad Title*</label>
                                                         <input [(ngModel)]=" covoiturage.designation" name="designation" type="text" placeholder="Enter Title">
                                                     </div>
-                                                </div>
-                                                <div class="col-12">
+                                                </div> <div class="col-12">
                                                     <div class="form-group">
-                                                      <label for="endDate">End Date:</label>
+                                                      <label for="endDate">Date:</label>
                                                       <input type="datetime-local" [(ngModel)]="covoiturage.heure_Depart" class="form-control" id="endDate" name="endDate">
                                                     </div>
                                                   </div>
+                                              
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label>Departure Location*</label>
+                                                        <label>lieu_depart*</label>
                                                         <input [(ngModel)]="covoiturage.lieu_depart" name="lieu_depart" type="text" placeholder="Enter Departure Location">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label>lieu_fin*</label>
+                                                        <input [(ngModel)]="covoiturage.lieu_fin" name="lieu_fin" type="text" placeholder="Enter Departure Location">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label>Nbre Place*</label>
+                                                        <input [(ngModel)]="covoiturage.nbrePlaceDisponible" name="bnre" type="number" placeholder="Enter Nombre Place">
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
