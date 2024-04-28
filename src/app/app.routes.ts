@@ -12,7 +12,7 @@ export const routes: Routes = [
         {path: 'Maps', component:MapsComponent},
         { path: 'add-covoiturage', component:AddCovoiturageComponent }, 
         {path: 'listmeetcovoi', component: ListCovoiturageComponent},
-
+       
        ]},
     { path: 'login', component: LoginComponent },
     {path: '', redirectTo:'login', pathMatch: 'full'},

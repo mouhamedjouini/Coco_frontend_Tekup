@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 export enum TypeCovoiturage {
   quotidien = 'quotidien',
-  OCCASIONNELLE = 'OCCASIONNELLE'
+  occasionnelle = 'occasionnelle'
 }
 
 @Component({
@@ -31,7 +31,7 @@ export class AddCovoiturageComponent implements OnInit {
 
   typeCovoiturageOptions: TypeCovoiturage[] = [
     TypeCovoiturage.quotidien,
-    TypeCovoiturage.OCCASIONNELLE
+    TypeCovoiturage.occasionnelle
   ];    
   constructor(private covoiturageService  : CovoiturageService , private router : Router){}
 
@@ -40,6 +40,7 @@ export class AddCovoiturageComponent implements OnInit {
   }
     ajouter(){
       console.log(this.covoiturage)
+     
       this.covoiturageService.ajouter(this.covoiturage).subscribe(
         (res)=>{
           console.log(this.covoiturage.designation);
@@ -47,7 +48,7 @@ export class AddCovoiturageComponent implements OnInit {
           console.log(this.covoiturage.nbrePlaceDisponible);
   
       console.log(res);
-      this.router.navigate(['/dashboard/listmeetcovoi'])
+      this.router.navigate(['dashboardUser/listmeetcovoi'])
         },
         err=>{
           console.log(err);
