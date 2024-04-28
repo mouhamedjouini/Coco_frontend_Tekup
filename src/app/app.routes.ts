@@ -3,6 +3,7 @@ import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.compo
 import { DashboardUserComponent } from './dashboard-user/dashboard-user.component';
 import { LoginComponent } from './login/login.component';
 import { MapsComponent } from './dashboard-user/maps/maps.component';
+import { RegisterComponent } from './register/register.component';
 import { AddCovoiturageComponent } from './dashboard-user/add-covoiturage/add-covoiturage.component';
 import { ListCovoiturageComponent } from './dashboard-user/list-covoiturage/list-covoiturage.component';
 
@@ -15,6 +16,7 @@ export const routes: Routes = [
 
        ]},
     { path: 'login', component: LoginComponent },
+    { path: 'register', component: RegisterComponent },
     {path: '', redirectTo:'login', pathMatch: 'full'},
     
 ];
