@@ -6,6 +6,7 @@ import { MapsComponent } from './dashboard-user/maps/maps.component';
 import { RegisterComponent } from './register/register.component';
 import { AddCovoiturageComponent } from './dashboard-user/add-covoiturage/add-covoiturage.component';
 import { ListCovoiturageComponent } from './dashboard-user/list-covoiturage/list-covoiturage.component';
+import { ListannonceuserComponent } from './dashboard-user/listannonceuser/listannonceuser.component';
 
 export const routes: Routes = [
     { path: 'dashboardAdmin', component: DashboardAdminComponent },
@@ -13,7 +14,7 @@ export const routes: Routes = [
         {path: 'Maps', component:MapsComponent},
         { path: 'add-covoiturage', component:AddCovoiturageComponent }, 
         {path: 'listmeetcovoi', component: ListCovoiturageComponent},
-       
+        {path :'listcovoiturageUser', component :ListannonceuserComponent}
        ]},
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
