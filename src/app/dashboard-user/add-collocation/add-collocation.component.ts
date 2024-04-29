@@ -22,14 +22,14 @@ export enum TypeAnnoColloc {
 })
 export class AddCollocationComponent implements OnInit {
   collocation={
-    "date_dispo":"",
-    "nbre_chmbre":0,
-    "descrption":"",
-    "Montant":0,
-    "nbre_person":0,
-    "typeLogement":"",
-    "typeAnnoColloc":"",
-    "userId":1
+    "date_dispo": "",
+    "nbre_chmbre": 0,
+    "descrption": "",
+    "nbre_person": 0,
+    "typeLogement": "",
+    "typeAnnoColloc": "",
+    "userId": 1,
+    "montant": 0
   }
   typeLogementOptions:TypeLogement[]=[
     TypeLogement.appartement,
@@ -45,12 +45,13 @@ export class AddCollocationComponent implements OnInit {
     
   }
   ajouter(){
-    console.log(this.collocation)
+
     this.collocationservice.ajouter(this.collocation).subscribe(
       (res)=>{
         console.log(this.collocation.descrption);
         console.log(this.collocation.date_dispo);
         console.log(res);
+        this.router.navigate(['dashboardUser/listcollocation'])
         },
         err=>{
           console.log(err);

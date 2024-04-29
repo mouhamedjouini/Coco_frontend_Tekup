@@ -8,9 +8,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class CollocationService {
   constructor(private http : HttpClient,private router:Router) { }
-  private  url = 'http://localhost:9093/annnonces';
+  private  url = 'http://localhost:9093/annonces';
   public  headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
   ajouter(annocecoll : any){
+    console.log(annocecoll)
     return this.http.post(this.url +'/add',annocecoll)
   }
   getall(){
