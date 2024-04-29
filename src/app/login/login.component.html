@@ -1,15 +1,15 @@
 
-
-    <!-- End Breadcrumbs -->
-
-    <!-- start login section -->
     <section class="login section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-12">
                     <div class="form-head">
+                        
                         <h4 class="title">Login</h4>
+                        
                         <form action="#!" method="post">
+                            
+                            
                             <div class="form-group">
                                 <label>Username or email</label>
                                 <input  [(ngModel)]="user.username" name="user"  type="username">     
@@ -33,9 +33,9 @@
                                 </div>
                             </div>
                             <div class="button">
-                                <button  type="submit" class="btn">Login Now</button>
+                                <button  type="submit"(click)="onLoggedin()" class="btn">Login Now</button>
                             </div>
-                            <p class="outer-link">Don't have an account? <a routerLink="/register">Register here</a>
+                            <p class="outer-link">Don't have an accounts? <a routerLink="/register">Register here</a>
                             </p>
                         </form>
                     </div>
