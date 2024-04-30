@@ -19,7 +19,7 @@ export const routes: Routes = [
         {path: 'listmeetcovoi', component: ListCovoiturageComponent},
         {path :'listcovoiturageUser', component :ListannonceuserComponent},
         {path: 'listcollocation', component: ListCollocationComponent}, 
- main
+ 
        ]},
        
     { path: 'login', component: LoginComponent },

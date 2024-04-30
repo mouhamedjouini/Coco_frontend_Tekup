@@ -32,8 +32,8 @@ constructor(private listUser : CovoiturageService , private router : Router ,  )
     deleteCovoiturage(annonceId: any): void {
       this.listUser.supprimer(annonceId).subscribe(
         () => {
-          console.log("Carpooling delete successfully");
-          this.router.navigate(['dashboardUser/listcovoiturageUser'])
+          console.log("Carpooling  successfully");
+         // this.router.navigatdeletee(['dashboardUser/listcovoiturageUser'])
        //   this.cocvoitu = this.cocvoitu.filter((covoiturage :any) => covoiturage.annonceId !=annonceId);
          this.ngOnInit();
 
