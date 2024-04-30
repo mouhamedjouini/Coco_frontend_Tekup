@@ -24,17 +24,26 @@ public roles!:string[];
     this.token = jwt;
     this.isloggedIn = true;
     this.decodeJWT();
+  
+    }
+    getCurrentUser(){
+      return this.http.get(this.url+''+this.loggedUser)
+
     }
   
       getToken():string {
       return this.token;
       }
+      getRoles():string[] {
+        return this.roles;
+        }
       decodeJWT(){
          if (this.token == undefined)
           return;
        const decodedToken = this.helper.decodeToken(this.token);
        this.roles = decodedToken.roles;
        this.loggedUser = decodedToken.sub;
+      
     console.log(""+this.roles+this.loggedUser);
 }
 }

@@ -14,11 +14,11 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class LoginComponent implements OnInit{
   constructor(private authService: AuthService,private router:Router){}
-  public token!: string;
+  public jwToken!: string;
   private helper = new JwtHelperService();
   public loggedUser!:string;
 public isloggedIn: Boolean = false;
-public roles!:string;
+public roles!:string[];
   err:number = 0;
   user ={
     username:'',
@@ -27,20 +27,30 @@ public roles!:string;
   ngOnInit(): void {
   }
   decodeJWT(){
-    if (this.token == undefined)
+    if (this.jwToken == undefined)
      return;
-  const decodedToken = this.helper.decodeToken(this.token);
+  let decodedToken = this.helper.decodeToken(this.jwToken);
   this.roles = decodedToken.roles;
   this.loggedUser = decodedToken.sub;
-console.log(""+this.roles+this.loggedUser);
+console.log("de"+decodedToken)
+console.log("MM"+this.roles+this.loggedUser);
 }
-
+getCurrentUser(){
+  this.roles=this.authService.getRoles();
+console.log(this.roles);
+this.authService.getCurrentUser().subscribe({
+  next:(data)=>{
+    console.log(data);
+  }
+})
+}
    onLoggedin(){
 this.authService.login(this.user).subscribe({
 next: (data) => {
-let jwToken = data.headers.get('Authorization')!;
-this.authService.saveToken(jwToken);
-if(this.roles=='Admin'){
+this.jwToken = data.headers.get('Authorization')!;
+this.authService.saveToken(this.jwToken);
+this.getCurrentUser()
+if(this.roles.includes('Admin')){
   this.router.navigate(['/dashboardAdmin']);
 }else{
 this.router.navigate(['/dashboardUser']);
