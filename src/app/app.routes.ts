@@ -7,6 +7,7 @@ import { AddCollocationComponent } from './dashboard-user/add-collocation/add-co
 import { RegisterComponent } from './register/register.component';
 import { AddCovoiturageComponent } from './dashboard-user/add-covoiturage/add-covoiturage.component';
 import { ListCovoiturageComponent } from './dashboard-user/list-covoiturage/list-covoiturage.component';
+import { ListannonceuserComponent } from './dashboard-user/listannonceuser/listannonceuser.component';
 import { ListCollocationComponent } from './dashboard-user/list-collocation/list-collocation.component';
 
 export const routes: Routes = [
@@ -15,8 +16,10 @@ export const routes: Routes = [
         {path: 'Maps', component:MapsComponent},
         { path: 'add-collocation', component:AddCollocationComponent }, 
         { path: 'add-covoiturage', component:AddCovoiturageComponent }, 
-        {path: 'listmeetcovoi', component: ListCovoiturageComponent}, 
+        {path: 'listmeetcovoi', component: ListCovoiturageComponent},
+        {path :'listcovoiturageUser', component :ListannonceuserComponent},
         {path: 'listcollocation', component: ListCollocationComponent}, 
+ main
        ]},
        
     { path: 'login', component: LoginComponent },
