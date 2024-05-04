@@ -9,11 +9,12 @@ import { AddCovoiturageComponent } from './dashboard-user/add-covoiturage/add-co
 import { ListCovoiturageComponent } from './dashboard-user/list-covoiturage/list-covoiturage.component';
 import { ListannonceuserComponent } from './dashboard-user/listannonceuser/listannonceuser.component';
 import { ListCollocationComponent } from './dashboard-user/list-collocation/list-collocation.component';
+import { MapleafletComponent } from './dashboard-user/mapleaflet/mapleaflet.component';
 
 export const routes: Routes = [
     { path: 'dashboardAdmin', component: DashboardAdminComponent },
     { path: 'dashboardUser', component: DashboardUserComponent , children:[
-        {path: 'Maps', component:MapsComponent},
+        {path: 'Maps', component:MapleafletComponent},
         { path: 'add-collocation', component:AddCollocationComponent }, 
         { path: 'add-covoiturage', component:AddCovoiturageComponent }, 
         {path: 'listmeetcovoi', component: ListCovoiturageComponent},
