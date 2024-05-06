@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class ListCollocationComponent  implements OnInit {
   constructor( private router: Router , private list : CollocationService){}
   collocation : any;
+  deleteSuccessMessage: string | null = null;
   ngOnInit(): void {
     this.list.getall().subscribe(
       (res)=>{
@@ -24,6 +25,21 @@ export class ListCollocationComponent  implements OnInit {
       
     )
     
+  }
+  deleteCollocation(id: any) {
+    // Call your service method to delete the collocation item by id
+    this.list.supprimer(id).subscribe(
+      (res) => {
+        // Handle success response or update UI as needed
+        console.log("Collocation deleted successfully");
+        this.deleteSuccessMessage = 'La collocation a été supprimée avec succès.';
+        this.ngOnInit(); 
+      },
+      (err) => {
+        // Handle error response
+        console.error("Error deleting collocation:", err);
+      }
+    );
   }
   
 }

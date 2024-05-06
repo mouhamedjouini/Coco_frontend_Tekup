@@ -49,6 +49,12 @@
                   </div>
                   <div class="col-12">
                     <div class="form-group">
+                      <label>Nombre de personnes</label>
+                      <input [(ngModel)]="collocation.nbre_person" name="personne" type="number" placeholder="Entrez le nombre de personnes" required>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group">
                       <label>Type de logement*</label>
                       <select [(ngModel)]="collocation.typeLogement" name="typeLogement" required>
                         <option *ngFor="let option of typeLogementOptions" [value]="option">{{ option }}</option>

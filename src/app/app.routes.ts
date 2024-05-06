@@ -9,6 +9,7 @@ import { AddCovoiturageComponent } from './dashboard-user/add-covoiturage/add-co
 import { ListCovoiturageComponent } from './dashboard-user/list-covoiturage/list-covoiturage.component';
 import { ListannonceuserComponent } from './dashboard-user/listannonceuser/listannonceuser.component';
 import { ListCollocationComponent } from './dashboard-user/list-collocation/list-collocation.component';
+import { UpdateCollocationComponent } from './dashboard-user/update-collocation/update-collocation.component';
 
 export const routes: Routes = [
     { path: 'dashboardAdmin', component: DashboardAdminComponent },
@@ -18,7 +19,8 @@ export const routes: Routes = [
         { path: 'add-covoiturage', component:AddCovoiturageComponent }, 
         {path: 'listmeetcovoi', component: ListCovoiturageComponent},
         {path :'listcovoiturageUser', component :ListannonceuserComponent},
-        {path: 'listcollocation', component: ListCollocationComponent}, 
+        {path: 'listcollocation', component: ListCollocationComponent},
+        {path:'updatecollocation',component:UpdateCollocationComponent} 
  
        ]},
        
