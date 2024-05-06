@@ -16,7 +16,7 @@ export class CovoiturageService {
     return this.http.post(this.url +'/addAnnonce',annocecovoi)
   }
 getall(){
-  return this.http.get(this.url +'/all')
+  return this.http.get<any[]>("http://localhost:9093/annoncecovoiturage/all")
 }
 supprimer(annonceId:any){
   return this.http.delete(this.url+'/delete/'+annonceId)

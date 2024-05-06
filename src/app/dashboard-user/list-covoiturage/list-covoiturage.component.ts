@@ -17,7 +17,7 @@ export class ListCovoiturageComponent implements OnInit {
   covoitu : any;
 
   ngOnInit(): void {
-    this.list.trierAnnonceCovoiturageParDate().subscribe(
+    this.list.getall().subscribe(
       (res)=>{
         this.covoitu=res;
         console.log(res)
