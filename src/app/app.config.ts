@@ -10,10 +10,8 @@ import { provideClientHydration } from '@angular/platform-browser';
 
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes),
-     provideAnimationsAsync(),
-     { provide: RECAPTCHA_V3_SITE_KEY, useValue: "6LfZLtUpAAAAAF3gysge3SX3P-s5-SataKdTaaUw" },
-       provideClientHydration()     
- ,provideHttpClient(),provideToastr(),]
+
+  providers: [provideRouter(routes), provideAnimationsAsync(),provideHttpClient(), provideAnimationsAsync(), provideClientHydration(),provideToastr(),]
+
 };
 

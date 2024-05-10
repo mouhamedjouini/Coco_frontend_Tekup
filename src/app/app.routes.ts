@@ -9,12 +9,14 @@ import { AddCovoiturageComponent } from './dashboard-user/add-covoiturage/add-co
 import { ListCovoiturageComponent } from './dashboard-user/list-covoiturage/list-covoiturage.component';
 import { ListannonceuserComponent } from './dashboard-user/listannonceuser/listannonceuser.component';
 import { ListCollocationComponent } from './dashboard-user/list-collocation/list-collocation.component';
+import { UpdateCollocationComponent } from './dashboard-user/update-collocation/update-collocation.component'
 import { MapleafletComponent } from './dashboard-user/mapleaflet/mapleaflet.component';
 import { ChattroomAssitanceComponent } from './dashboard-user/chattroom-assitance/chattroom-assitance.component';
 import { ReclamtionComponent } from './dashboard-user/reclamtion/reclamtion.component';
 import { WebsocketComponent } from './dashboard-user/websocket/websocket.component';
 import { ClaimsComponent } from './dashboard-admin/claims/claims.component';
 import { StatComponent } from './dashboard-admin/stat/stat.component';
+
 
 export const routes: Routes = [
     { path: 'dashboardAdmin', component: DashboardAdminComponent, children:[
@@ -27,10 +29,15 @@ export const routes: Routes = [
         { path: 'add-covoiturage', component:AddCovoiturageComponent }, 
         {path: 'listmeetcovoi', component: ListCovoiturageComponent},
         {path :'listcovoiturageUser', component :ListannonceuserComponent},
+
         {path: 'listcollocation', component: ListCollocationComponent}, 
         {path:'Chattroomassitance', component: ChattroomAssitanceComponent},
         {path:'reclamtion', component:ReclamtionComponent},
-        
+
+      
+        {path:'updatecollocation',component:UpdateCollocationComponent} 
+ 
+
        ]},
 
     { path: 'login', component: LoginComponent },
