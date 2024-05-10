@@ -114,8 +114,8 @@ Start Category -->
                                                             </div>
                                                           </div>
                                                           <div *ngIf="message.reponse!=null &&message.isityourcomment==false">
-                                                            <div *ngIf="message.reponse.user.id_user==currentuser.id_user" class="message other-message" style="margin-top: 2%; margin-left: 60%; color: rgb(88, 88, 88);" >Response(you : {{message.reponse.content}})</div>
-                                                            <div *ngIf="message.reponse.user.id_user!=currentuser.id_user" class="message other-message" style="margin-top: 2%; margin-left: 60%; color: rgb(88, 88, 88);" >Response({{message.reponse.user.username}} : {{message.reponse.content}})</div>
+                                                            <div *ngIf="message.reponse.user.id==currentuser.id" class="message other-message" style="margin-top: 2%; margin-left: 60%; color: rgb(88, 88, 88);" >Response(you : {{message.reponse.content}})</div>
+                                                            <div *ngIf="message.reponse.user.id!=currentuser.id" class="message other-message" style="margin-top: 2%; margin-left: 60%; color: rgb(88, 88, 88);" >Response({{message.reponse.user.username}} : {{message.reponse.content}})</div>
                                                           </div>
                                                             <div class="message-data">
                                                                 <span class="message-data-time" *ngIf="message.isityourcomment==true">{{message.dateTime |date}}</span>
@@ -211,8 +211,8 @@ Start Category -->
             <h2>Invite users to Room</h2>
             <ul>
               <li *ngFor="let user of Users">
-                <input type="checkbox" *ngIf="user" id="{{user.id_user}}" [checked]="isUserSelected(user.id_user)" (change)="toggleUser(user.id_user, $event)">
-                <label for="{{user.id_user}}">
+                <input type="checkbox" *ngIf="user" id="{{user.id}}" [checked]="isUserSelected(user.id)" (change)="toggleUser(user.id, $event)">
+                <label for="{{user.id}}">
                   {{user.username}}<br><br>
                 </label>
               </li><br><br>
