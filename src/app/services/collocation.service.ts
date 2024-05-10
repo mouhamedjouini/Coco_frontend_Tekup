@@ -15,16 +15,16 @@ export class CollocationService {
     return this.http.post(this.url +'/add',annocecoll)
   }
   getall(){
-    return this.http.get(this.url +'all',{headers:this.headers})
+    return this.http.get(this.url +'/all')
   }
   supprimer(id:any){
-    return this.http.delete(this.url+'delete'+id,{headers :this.headers})
+    return this.http.delete(this.url+'/delete/'+id)
   }
   modifier(id :any , annocecoll : any){
-    return this.http.put(this.url+'update'+id ,annocecoll,{headers:this.headers})
+    return this.http.put(this.url+'update'+id ,annocecoll)
   }
   getbyid(id:any){
-    return this.http.get(this.url+id,{headers:this.headers})
+    return this.http.get(this.url+id)
   }
 
 }

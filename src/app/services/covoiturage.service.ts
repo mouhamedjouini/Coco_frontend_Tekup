@@ -16,32 +16,32 @@ export class CovoiturageService {
     return this.http.post(this.url +'/addAnnonce',annocecovoi)
   }
 getall(){
-  return this.http.get(this.url +'all',{headers:this.headers})
+  return this.http.get<any[]>("http://localhost:9093/annoncecovoiturage/all")
 }
-supprimer(id:any){
-  return this.http.delete(this.url+id,{headers :this.headers})
+supprimer(annonceId:any){
+  return this.http.delete(this.url+'/delete/'+annonceId)
 
 }
 modifier(id :any , annocecovoi : any){
-  return this.http.put(this.url+'update'+id ,annocecovoi,{headers:this.headers})
+  return this.http.put(this.url+'update'+id ,annocecovoi)
 }
 findByLieuDepart(lieuDepart: any) {
-  return this.http.get(this.url + 'bylieu?lieuDepart=' + lieuDepart, { headers: this.headers });
+  return this.http.get(this.url + 'bylieu?lieuDepart=' + lieuDepart);
 }
 
 rechercherAnnoncesParUtilisateur(userId: any) {
-  return this.http.get(this.url + 'byUser?userId=' + userId, { headers: this.headers });
+  return this.http.get(this.url + '/byUser?userId=' + userId);
 }
 
 trierAnnonceCovoiturageParDate() {
-  return this.http.get(this.url + 'sortAnnoncebyDate', { headers: this.headers });
+  return this.http.get(this.url + '/sortAnnoncebyDate');
 }
 
 getStatsByUsers() {
-  return this.http.get(this.url + 'stats/users', { headers: this.headers });
+  return this.http.get(this.url + '/stats/users');
 }
 
 getUserWithMostAnnouncements() {
-  return this.http.get(this.url + 'userWithMostAnnouncements', { headers: this.headers });
+  return this.http.get(this.url + 'userWithMostAnnouncements');
 }
 }

@@ -3,9 +3,9 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import * as L from 'leaflet';
 import * as Leaflet from 'leaflet'; 
 import "leaflet-control-geocoder";
-import "leaflet/dist/images/marker-shadow.png"; // Add this line
-import "leaflet/dist/images/marker-icon-2x.png"; // Add this line
-import "leaflet/dist/images/marker-icon.png"; // Add this line
+//import "leaflet/dist/images/marker-shadow.png"; // Add this line
+//import "leaflet/dist/images/marker-icon-2x.png"; // Add this line
+//import "leaflet/dist/images/marker-icon.png"; // Add this line
 import { TrajetService } from '../../services/trajet.service';
 //import userMarkerIcon from 'assets/markers.jpg';
 Leaflet.Icon.Default.mergeOptions({

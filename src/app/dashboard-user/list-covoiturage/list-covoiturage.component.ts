@@ -12,15 +12,25 @@ import { CommonModule } from '@angular/common';
   styleUrl: './list-covoiturage.component.css'
 })
 export class ListCovoiturageComponent implements OnInit {
-  public url='http://localhost:9093/'
+ // public url='http://localhost:9093/'
   constructor( private router: Router , private list : CovoiturageService){}
   covoitu : any;
 
   ngOnInit(): void {
     this.list.getall().subscribe(
+      (res)=>{
+        this.covoitu=res;
+        console.log(res)
+      },(err)=>{
+        console.log(err);
+    
+        this.ngOnInit()
+      }
       
     )
     
   }
 
+
+  
 }
