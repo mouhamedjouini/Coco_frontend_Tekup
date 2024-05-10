@@ -23,6 +23,7 @@ export class ClaimsComponent {
   currentPage = 0; //
   ngOnInit(): void {
     this.getClaims();
+    
       this.ClaimsService.calculateClaimPercentage().subscribe((dat) => {
         // @ts-ignore
         this.percentage = dat; 
@@ -51,6 +52,7 @@ export class ClaimsComponent {
   getClaims(): void {
     this.ClaimsService.getClaims(this.currentPage, this.pageSize)
       .subscribe((data: any) => { 
+        console.log(data)
         this.allReclamation = data.content; 
         this.totalItems = data.totalElements; 
       });

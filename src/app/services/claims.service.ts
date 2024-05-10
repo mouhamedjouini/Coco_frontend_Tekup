@@ -15,7 +15,7 @@ export class ClaimsService {
     findByUser(id:number) {
       return this.httpClient.get<Claims>(`http://localhost:9093/findByUser/${id}`);
     }
-  AddClaim(claim:Claims){
+  AddClaim(claim:Claims): Observable<Claims> {
       return this.httpClient.post<Claims>('http://localhost:9093/addClaim', claim);
     }
     statusClaims(id: number, statu:string): Observable<Claims> {
