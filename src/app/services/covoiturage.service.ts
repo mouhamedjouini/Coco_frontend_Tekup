@@ -23,10 +23,10 @@ supprimer(annonceId:any){
 
 }
 modifier(id :any , annocecovoi : any){
-  return this.http.put(this.url+'update'+id ,annocecovoi,{headers:this.headers})
+  return this.http.put(this.url+'update'+id ,annocecovoi)
 }
 findByLieuDepart(lieuDepart: any) {
-  return this.http.get(this.url + 'bylieu?lieuDepart=' + lieuDepart, { headers: this.headers });
+  return this.http.get(this.url + 'bylieu?lieuDepart=' + lieuDepart);
 }
 
 rechercherAnnoncesParUtilisateur(userId: any) {
@@ -38,10 +38,10 @@ trierAnnonceCovoiturageParDate() {
 }
 
 getStatsByUsers() {
-  return this.http.get(this.url + 'stats/users', { headers: this.headers });
+  return this.http.get(this.url + '/stats/users');
 }
 
 getUserWithMostAnnouncements() {
-  return this.http.get(this.url + 'userWithMostAnnouncements', { headers: this.headers });
+  return this.http.get(this.url + 'userWithMostAnnouncements');
 }
 }

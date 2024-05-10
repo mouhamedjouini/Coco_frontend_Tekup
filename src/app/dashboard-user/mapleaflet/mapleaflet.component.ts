@@ -169,10 +169,10 @@ this.adminService.setData({
        waypointMarker.on('mouseover', () => {
         const popupContent = `<div>
       
-        <p><strong>DateSortie:</strong> ${data.designation}</p>
-        <p><strong>Price:</strong> ${data.heure_Depart}</p>
-        <p><strong>Depart point :</strong> ${data.lieu_fin}</p>
-        <p><strong>Destination :</strong> ${data.lieu_depart}</p>
+        <p><strong>Designation:</strong> ${data.designation}</p>
+        <p><strong>Date Depart:</strong> ${data.heure_Depart}</p>
+        <p><strong>Depart point :</strong> ${data.lieu_depart}</p>
+        <p><strong>Final point :</strong> ${data.lieu_fin}</p>
         <p><strong>Nombre de place disponible :</strong> ${data.nbrePlaceDisponible}</p>
         <p>This is covoiturage</p>
         <button id="confirmButton">Confirm Participation</button>
@@ -183,7 +183,7 @@ this.adminService.setData({
        confirmButton.addEventListener('click', () => {
        console.log('Participant confirmed');
        Swal.fire('Success!', 'Reservation  avec succès', 'success');
-
+        this.router.navigate(['/dashboardUser'])
            // this.router.navigate(['/detailCarp', data.id]); // Passing the id directly to the route
        //console.log("id   ",data.id);
        
