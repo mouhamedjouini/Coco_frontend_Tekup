@@ -67,7 +67,7 @@ constructor(private toastr: ToastrService,private ChatroomMessageService: Chatro
 ngOnInit(): void {
   this.initializeaddForm();
   this.initializeeditForm();
-  this.currentuser.id_user=1;
+  this.currentuser.id=1;
   this.ChatroomMessageService.getAllRooms().subscribe((data) => {
     if (data ) {
       console.log(data)
@@ -75,13 +75,13 @@ ngOnInit(): void {
       this.Chatrooms = data;
      
       for (let i = 0; i < this.Chatrooms.length; i++) {
-        this.Chatrooms[i].isitowner = this.Chatrooms[i].owner.id_user === this.currentuser.id_user;
-        this.Chatrooms[i].isitinthelis = this.Chatrooms[i].users.some(user => user.id_user === this.currentuser.id_user);
+        this.Chatrooms[i].isitowner = this.Chatrooms[i].owner.id === this.currentuser.id;
+        this.Chatrooms[i].isitinthelis = this.Chatrooms[i].users.some(user => user.id === this.currentuser.id);
 
        
           if (this.Chatrooms[i].messages && this.Chatrooms[i].messages.length > 0) {
             for (let j = 0; j < this.Chatrooms[i].messages.length; j++) {
-              this.Chatrooms[i].messages[j].isityourcomment = this.Chatrooms[i].messages[j].user.id_user === this.currentuser.id_user;
+              this.Chatrooms[i].messages[j].isityourcomment = this.Chatrooms[i].messages[j].user.id === this.currentuser.id;
               
             }
           }
@@ -116,10 +116,10 @@ ngOnInit(): void {
       // @ts-ignore
       this.Users = ii;
       for(let k=0;k<this.Users.length;k++){
-        if(this.Users[k].id_user==this.currentuser.id_user){this.username=this.Users[k].username}
+        if(this.Users[k].id==this.currentuser.id){this.username=this.Users[k].username}
       
     }
-      this.Users = this.Users.filter(user => user.id_user !== this.currentuser.id_user);
+      this.Users = this.Users.filter(user => user.id !== this.currentuser.id);
       
     });
   });
@@ -133,7 +133,7 @@ onlike(){
           for (let j = 0; j < this.Chatrooms[i].messages.length; j++) {
               if (this.Chatrooms[i].messages[j].messageId == this.idddmmmessage) {
                   const reactions = this.Chatrooms[i].messages[j].reactions;
-                  const userReaction = reactions.find(reaction => reaction.user.id_user == this.currentuser.id_user);
+                  const userReaction = reactions.find(reaction => reaction.user.id == this.currentuser.id);
                   
                   if (userReaction) {
                       if (userReaction.type == "Like") {
@@ -190,7 +190,7 @@ onlike(){
                       const newReaction = new Reaction();
                       newReaction.type = "Like";
                       
-                      this.ReactionReponseService.AddReaction(newReaction, this.idddmmmessage, this.currentuser.id_user).subscribe(
+                      this.ReactionReponseService.AddReaction(newReaction, this.idddmmmessage, this.currentuser.id).subscribe(
                           response => {
                             // @ts-ignore
                               this.rectionpopup = false;
@@ -231,7 +231,7 @@ onhaha(){
           for (let j = 0; j < this.Chatrooms[i].messages.length; j++) {
               if (this.Chatrooms[i].messages[j].messageId == this.idddmmmessage) {
                   const reactions = this.Chatrooms[i].messages[j].reactions;
-                  const userReaction = reactions.find(reaction => reaction.user.id_user == this.currentuser.id_user);
+                  const userReaction = reactions.find(reaction => reaction.user.id == this.currentuser.id);
                   
                   if (userReaction) {
                       if (userReaction.type == "HAHA") {
@@ -288,7 +288,7 @@ onhaha(){
                       const newReaction = new Reaction();
                       newReaction.type = "HAHA";
                       
-                      this.ReactionReponseService.AddReaction(newReaction, this.idddmmmessage, this.currentuser.id_user).subscribe(
+                      this.ReactionReponseService.AddReaction(newReaction, this.idddmmmessage, this.currentuser.id).subscribe(
                           response => {
                             // @ts-ignore
                               this.rectionpopup = false;
@@ -323,7 +323,7 @@ onlove(){
           for (let j = 0; j < this.Chatrooms[i].messages.length; j++) {
               if (this.Chatrooms[i].messages[j].messageId == this.idddmmmessage) {
                   const reactions = this.Chatrooms[i].messages[j].reactions;
-                  const userReaction = reactions.find(reaction => reaction.user.id_user == this.currentuser.id_user);
+                  const userReaction = reactions.find(reaction => reaction.user.id == this.currentuser.id);
                   
                   if (userReaction) {
                       if (userReaction.type == "LOVE") {
@@ -380,7 +380,7 @@ onlove(){
                       const newReaction = new Reaction();
                       newReaction.type = "LOVE";
                       
-                      this.ReactionReponseService.AddReaction(newReaction, this.idddmmmessage, this.currentuser.id_user).subscribe(
+                      this.ReactionReponseService.AddReaction(newReaction, this.idddmmmessage, this.currentuser.id).subscribe(
                           response => {
                             // @ts-ignore
                               this.rectionpopup = false;
@@ -415,7 +415,7 @@ onangry(){
           for (let j = 0; j < this.Chatrooms[i].messages.length; j++) {
               if (this.Chatrooms[i].messages[j].messageId == this.idddmmmessage) {
                   const reactions = this.Chatrooms[i].messages[j].reactions;
-                  const userReaction = reactions.find(reaction => reaction.user.id_user == this.currentuser.id_user);
+                  const userReaction = reactions.find(reaction => reaction.user.id == this.currentuser.id);
                   
                   if (userReaction) {
                       if (userReaction.type == "ANGRY") {
@@ -472,7 +472,7 @@ onangry(){
                       const newReaction = new Reaction();
                       newReaction.type = "ANGRY";
                       
-                      this.ReactionReponseService.AddReaction(newReaction, this.idddmmmessage, this.currentuser.id_user).subscribe(
+                      this.ReactionReponseService.AddReaction(newReaction, this.idddmmmessage, this.currentuser.id).subscribe(
                           response => {
                             // @ts-ignore
                               this.rectionpopup = false;
@@ -526,7 +526,7 @@ OnDblClickHover(id:number){
 AddReponse(id:number){
   let r=new Reponse();
   r.content=this.messagResponse;
-this.ReactionReponseService.AddReponse(r,id,this.currentuser.id_user).subscribe(
+this.ReactionReponseService.AddReponse(r,id,this.currentuser.id).subscribe(
 response => { 
   for(let i=0;i<this.Chatrooms.length;i++){
     for(let j=0;j<this.Chatrooms[i].messages.length;j++){
@@ -634,7 +634,7 @@ onadd(){
     c.description=this.addchatroomforum.get('description')!.value;
     c.nom=this.addchatroomforum.get('nom')!.value;
     c.status=this.addchatroomforum.get('status')!.value;
-    this.ChatroomMessageService.AddChatroom(c,this.currentuser.id_user).subscribe(
+    this.ChatroomMessageService.AddChatroom(c,this.currentuser.id).subscribe(
       response => {
           this.Chatrooms.push(response);
           this.idroom=response.chatRoomId;
@@ -702,7 +702,7 @@ closejoindre(){
   this.openj=false;
 }
 joindre(){
-  this.ChatroomMessageService.joindre(this.currentuser.id_user,this.idroom).subscribe(
+  this.ChatroomMessageService.joindre(this.currentuser.id,this.idroom).subscribe(
     response => {
         for(let i=0 ;i<this.Chatrooms.length;i++){
           if(response.chatRoomId==this.Chatrooms[i].chatRoomId){
@@ -784,7 +784,7 @@ else{
 addmessage(id:number){
 let m=new MessageChattrom();
 m.content=this.messageadd;
-this.ChatroomMessageService.AddMessage(m,id,this.currentuser.id_user).subscribe(
+this.ChatroomMessageService.AddMessage(m,id,this.currentuser.id).subscribe(
   response => {
     this.messageadd='';
     for(let i=0 ;i<this.Chatrooms.length;i++){

@@ -34,15 +34,11 @@ export class ReclamtionComponent {
   claimTypes: string[] = ['Other', 'CARPOLING', 'COLLOCATION', 'Post'];
   ngOnInit(): void {
     this.initializeForm();
-    this.user.id_user=1;
-    this.ClaimsService.findByUser(this.user.id_user).subscribe((data) => {
+    this.user.id=1;
+    this.ClaimsService.findByUser(this.user.id).subscribe((data) => {
       // @ts-ignore
       this.allReclamation = data; 
     console.log( this.allReclamation)});
-  }
-  resolved(captchaResponse: string ) {
-    console.log(`Resolved captcha with response: ${captchaResponse}`);
-    this.recaptchaResolved = true;
   }
   initializeForm(): void {
     this.newClaimFormGroup = this.formBuilder.group({

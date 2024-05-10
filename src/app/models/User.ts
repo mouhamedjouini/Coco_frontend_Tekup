@@ -1,5 +1,5 @@
 export class user{
-    id_user!:number;
+    id!:number;
     username!: string;
    
 }
