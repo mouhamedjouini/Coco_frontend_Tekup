@@ -7,11 +7,11 @@ import { Claims } from '../../models/Claims';
 import { user } from '../../models/User';
 import { TypeClaim } from '../../models/TypeClaim';
 import { ReCaptchaV3Service, RecaptchaFormsModule, RecaptchaModule, RecaptchaV3Module } from 'ng-recaptcha';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reclamtion',
   standalone: true,
-  schemas: [ NO_ERRORS_SCHEMA,CUSTOM_ELEMENTS_SCHEMA ],
   imports: [FormsModule , CommonModule,
     RecaptchaModule,ReactiveFormsModule, 
     ReactiveFormsModule,
@@ -21,7 +21,7 @@ import { ReCaptchaV3Service, RecaptchaFormsModule, RecaptchaModule, RecaptchaV3M
   styleUrl: './reclamtion.component.css'
 })
 export class ReclamtionComponent {
-  constructor(private ClaimsService: ClaimsService,private dialogRef : MatDialog,private formBuilder: FormBuilder ){}
+  constructor(private ClaimsService: ClaimsService,private dialogRef : MatDialog,private formBuilder: FormBuilder ,private router : Router ){}
   allReclamation: Claims[] = [];
   user = new user();
   newClaimFormGroup!: FormGroup;
@@ -105,14 +105,14 @@ export class ReclamtionComponent {
       if(this.newClaimFormGroup.get('TypeClaim')!.value=="COLLOCATION"){
         c.typeClaim=TypeClaim.COLLOCATION;
       }
-      if(this.newClaimFormGroup.get('TypeClaim')!.value=="Post"){
-        c.typeClaim=TypeClaim.Post;
-      }
       c.user=this.user;
       console.log(c)
       this.ClaimsService.AddClaim(c).subscribe({
         next: data => {
+
           location.reload();
+          this.router.navigate(['/dashboardUser']);
+
         },
         error: err => {
           console.error(err);
