@@ -4,6 +4,7 @@ import { Claims } from '../../models/Claims';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 
 @Component({
   selector: 'app-claims',
@@ -16,29 +17,29 @@ export class ClaimsComponent {
   constructor(private ClaimsService : ClaimsService){}
   allReclamation: Claims[] = [];
   percentage!:Map<string, number>;
-   claimTypes = ['Post', 'CARPOLING', 'COLLOCATION', 'Other'];
+   claimTypes = ['CARPOLING', 'COLLOCATION', 'Other'];
    percentageMap = new Map();
    pageSize = 3; // Nombre d'éléments par page
   totalItems = 0; // Nombre total d'éléments
   currentPage = 0; //
   ngOnInit(): void {
     this.getClaims();
-    
+
       this.ClaimsService.calculateClaimPercentage().subscribe((dat) => {
         // @ts-ignore
         this.percentage = dat; 
         this.percentageMap= this.fillMissingPercentages(this.percentage);
-       
       });
    
   }
+  
   search(event: any): void {
     const query = event.target.value; // Obtenez la valeur du champ de recherche
     if (!query) {
       this.getClaims(); // Si la recherche est vide, afficher toutes les réclamations
       return;
     }
-  
+
     // Filtrer les réclamations basées sur le titre, le nom du client, la description, etc.
     this.allReclamation = this.allReclamation.filter(claim =>
       claim.title.toLowerCase().includes(query.toLowerCase()) ||
@@ -46,6 +47,7 @@ export class ClaimsComponent {
       claim.description.toLowerCase().includes(query.toLowerCase()) ||
       claim.typeClaim.toLowerCase().includes(query.toLowerCase()) ||
       claim.statusClaims.toLowerCase().includes(query.toLowerCase())
+      
     );
   }
   
@@ -68,6 +70,7 @@ export class ClaimsComponent {
 statusclaim(id:number,status:string){
   this.ClaimsService.statusClaims(id,status).subscribe(
     response => {
+      
         location.reload();
     },
     error => {

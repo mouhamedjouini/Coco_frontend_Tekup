@@ -1,10 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Chart, registerables } from 'chart.js';
+import {  registerables } from 'chart.js';
 import { CovoiturageService } from '../../services/covoiturage.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import 'chartjs-adapter-moment';
-
+import Chart from 'chart.js/auto';
 @Component({
   selector: 'app-stat',
   standalone: true,
@@ -12,49 +12,68 @@ import 'chartjs-adapter-moment';
   templateUrl: './stat.component.html',
   styleUrl: './stat.component.css'
 })
-export class StatComponent implements OnInit {
-  @ViewChild('myChart') myChart!: ElementRef;
+export class StatComponent  implements OnInit {
   chart: any;
-  constructor(private covoiturageService: CovoiturageService) { }
+  datasets: any[] = []; // Ajoutez cette propriété pour stocker les données de l'ensemble de données
 
-  ngOnInit(): void {
-    this.getStatsByUsers();
-  }
+  constructor(private covoiturageService: CovoiturageService) {}
 
-  getStatsByUsers(): void {
+  ngOnInit() {
     this.covoiturageService.getStatsByUsers().subscribe(
-      (data: any) => {
-        console.log('Statistiques des utilisateurs : ', data);
-        this.createChart(data);
+      (stats: any) => {
+        const statsArray = Object.values(stats);
+        const labels: any[] = [];
+        const datasets: any[] = [];
+
+        statsArray.forEach((stat: any, index: number) => {
+          const username = stat.username;
+          const data = stat.announcementCount;
+          
+          const colors = ['#FF5733', '#33FF6E', '#336BFF', '#FF33E9', '#E9FF33', '#33FFE9'];
+          const color = colors[index % colors.length];
+
+          labels.push(username);
+
+          datasets.push({
+            label: username,
+            data: [data],
+            backgroundColor: color, // Couleur de la barre
+            fill: false
+          });
+        });
+
+        this.datasets = datasets; // Assignez les données à la propriété de classe pour les utiliser dans le modèle
+
+        this.chart = new Chart('canvas', {
+          type: 'bar', // Utilisez un graphique en barres
+          data: {
+            labels: labels,
+            datasets: datasets
+          },
+          options: {
+            scales: {
+              x: {
+                display: true,
+                title: {
+                  display: true,
+                  text: 'User'
+                }
+              },
+              y: {
+                beginAtZero: true,
+                display: true,
+                title: {
+                  display: true,
+                  text: 'Announcement Count'
+                }
+              }
+            }
+          }
+        });
       },
-      error => {
-        console.error('Une erreur est survenue lors de la récupération des statistiques des utilisateurs : ', error);
+      (error) => {
+        console.error('Error fetching statistics:', error);
       }
     );
   }
-
-  createChart(statsData: { [key: string]: any }): void {
-    const ctx = this.myChart.nativeElement.getContext('2d');
-    this.chart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: Object.keys(statsData).map(key => statsData[key].username),
-        datasets: [{
-          label: 'Nombre d\'annonces',
-          data: Object.values(statsData).map((val: any) => val.announcementCount),
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          borderColor: 'rgba(75, 192, 192, 1)',
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
-  }
-  
 }
