@@ -1,11 +1,14 @@
-import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { MapleafletComponent } from '../mapleaflet/mapleaflet.component';
 import { CovoiturageService } from '../../services/covoiturage.service';
 import { AuthService } from '../../services/auth.service';
 import { NgForm } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
-
+enum TypeCovoiturage {
+  Quotidien = 'quotidien',
+  Occasionnelle = 'occasionnelle'
+}
 @Component({
   selector: 'app-pop-content',
   standalone: true,
@@ -13,8 +16,9 @@ import Swal from 'sweetalert2';
   templateUrl: './pop-content.component.html',
   styleUrl: './pop-content.component.css'
 })
-export class PopContentComponent {
+export class PopContentComponent  implements OnInit {
   data : any;
+  user:any;
   covoiturage={
   
     designation: '',
@@ -22,7 +26,7 @@ export class PopContentComponent {
     lieu_depart: '',
     nbrePlaceDisponible: 0,
     lieu_fin:'',
-   // typeCovoiturage: "",
+    typeCovoiturage: "",
     idUSEr: 1,
  // typeCovoiturage: TypeCovoiturage.quotidien
     destinationLatitude:0,
@@ -32,11 +36,27 @@ export class PopContentComponent {
 
   }
  
+ 
   @Output() okClicked = new EventEmitter<void>();
   @ViewChild(MapleafletComponent) mapleafletComponent: any;
 
   
-  constructor(private carppolingServiceService: CovoiturageService , private adminService : AuthService) { }
+  constructor(private carppolingServiceService: CovoiturageService , private adminService : AuthService ,private authService:AuthService) { }
+  ngOnInit(): void {
+    this.getCurrentUser();
+  }
+  getCurrentUser(){
+    this.authService.getCurrentUser().subscribe({
+      next:(data)=>{
+        console.log(data);
+        this.user=data
+        console.log(this.user);
+      },
+      error(err) {
+        console.log(err)
+        
+      },
+    })}
   onMapClick(event: L.LeafletMouseEvent): void {
     // Récupérer les coordonnées du clic
     const lat = event.latlng.lat;
@@ -48,6 +68,7 @@ export class PopContentComponent {
   }
 
   onOkClick(productForm: NgForm): void {
+    console.log(this.user.id)
    // const formData = this.preparedFormData(this.covoiturage);
         this.adminService.getData().subscribe((data) => { 
 
@@ -57,6 +78,8 @@ export class PopContentComponent {
           this.covoiturage.destinationLongitude=data.position2.lng
                }
              );
+             console.log(this.user.id)
+             this.covoiturage.idUSEr=this.user.id
     this.carppolingServiceService.ajouter(this.covoiturage).subscribe(
       (result: any) => {
         console.log('Carpooling ajouté avec succès !', result);
@@ -88,7 +111,7 @@ export class PopContentComponent {
       lieu_depart: '',
       nbrePlaceDisponible: 0,
       lieu_fin:'',
-     // typeCovoiturage: "",
+     typeCovoiturage: "",
       idUSEr: 1,
    // typeCovoiturage: TypeCovoiturage.quotidien
       destinationLatitude:0,

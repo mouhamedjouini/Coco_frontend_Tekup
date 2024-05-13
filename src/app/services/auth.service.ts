@@ -27,13 +27,31 @@ public roles!:string[];
     this.decodeJWT();
   
     }
-    getCurrentUser(){
+    getCurrentUser():Observable<any>{
+   const tokenj=localStorage.getItem('jwt')
+   if (tokenj !== null) {
+    this.token = tokenj; // Cela fonctionnera car tokenFromStorage est de type string ici
+  
+      const decodedToken = this.helper.decodeToken(tokenj);
+      console.log("token"+this.token)
+      this.loggedUser = decodedToken.sub;
       return this.http.get(this.url+''+this.loggedUser)
-
+   }
+   return new Observable();
+    }
+    public isLoggedIn(): boolean {
+      let tokenj = localStorage.getItem('token');
+  
+      if (tokenj) {
+        return true;
+      }
+  
+      return false;
     }
   
       getToken():string {
-      return this.token;
+      //return this.token;
+      return"";
       }
       getRoles():string[] {
         return this.roles;

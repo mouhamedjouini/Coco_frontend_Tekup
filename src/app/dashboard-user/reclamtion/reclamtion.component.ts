@@ -8,6 +8,7 @@ import { user } from '../../models/User';
 import { TypeClaim } from '../../models/TypeClaim';
 import { ReCaptchaV3Service, RecaptchaFormsModule, RecaptchaModule, RecaptchaV3Module } from 'ng-recaptcha';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-reclamtion',
@@ -21,9 +22,10 @@ import { Router } from '@angular/router';
   styleUrl: './reclamtion.component.css'
 })
 export class ReclamtionComponent {
-  constructor(private ClaimsService: ClaimsService,private dialogRef : MatDialog,private formBuilder: FormBuilder ,private router : Router ){}
+  constructor(private ClaimsService: ClaimsService,private dialogRef : MatDialog,private formBuilder: FormBuilder ,private router : Router,private authService:AuthService ){}
   allReclamation: Claims[] = [];
-  user = new user();
+  userc!:any
+  user :any;
   newClaimFormGroup!: FormGroup;
   ModifiClaimFormGroup!: FormGroup;
   openadd:boolean=false;
@@ -33,13 +35,33 @@ export class ReclamtionComponent {
   recaptchaResolved: boolean = false;
   claimTypes: string[] = ['Other', 'CARPOLING', 'COLLOCATION', 'Post'];
   ngOnInit(): void {
+    this.getCurrentUser();
     this.initializeForm();
-    this.user.id=1;
-    this.ClaimsService.findByUser(this.user.id).subscribe((data) => {
+  
+ 
+    
+    /*this.ClaimsService.findByUser(this.user.id).subscribe((data) => {
       // @ts-ignore
       this.allReclamation = data; 
-    console.log( this.allReclamation)});
+    console.log( this.allReclamation)});*/
   }
+  getCurrentUser(){
+    this.authService.getCurrentUser().subscribe({
+      next:(data)=>{
+        console.log(data);
+        this.user=data
+        this.userc=this.user.id
+        console.log(this.userc)
+    
+        //this.user.iduser=this.userc.id
+       
+    //    console.log("i"+this.user.iduser);
+      },
+      error(err) {
+        console.log(err)
+        
+      },
+    })}
   initializeForm(): void {
     this.newClaimFormGroup = this.formBuilder.group({
       title: ['', Validators.required],
@@ -105,7 +127,8 @@ export class ReclamtionComponent {
       if(this.newClaimFormGroup.get('TypeClaim')!.value=="COLLOCATION"){
         c.typeClaim=TypeClaim.COLLOCATION;
       }
-      c.user=this.user;
+      c.iduser=this.userc
+      c.statusClaims="Pending"
       console.log(c)
       this.ClaimsService.AddClaim(c).subscribe({
         next: data => {
@@ -116,6 +139,7 @@ export class ReclamtionComponent {
         },
         error: err => {
           console.error(err);
+          //this.router.navigate(['/dashboardUser']);
         }
       });
     }

@@ -3,6 +3,8 @@ import { CollocationService } from '../../services/collocation.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
+import { user } from '../../models/User';
 
 export enum TypeLogement {
   appartement = 'appartement',
@@ -28,9 +30,10 @@ export class AddCollocationComponent implements OnInit {
     "nbre_person": 0,
     "typeLogement": "",
     "typeAnnoColloc": "",
-    "userId": 1,
+    "userId": 0,
     "montant": 0
   }
+  user:any 
   typeLogementOptions:TypeLogement[]=[
     TypeLogement.appartement,
     TypeLogement.maison
@@ -40,11 +43,24 @@ export class AddCollocationComponent implements OnInit {
     TypeAnnoColloc.full_recent,
     TypeAnnoColloc.room_sharing
   ];
-  constructor(private collocationservice  : CollocationService , private router : Router){}
+  constructor(private collocationservice  : CollocationService , private router : Router,private authService :AuthService){}
+  getCurrentUser(){
+  this.authService.getCurrentUser().subscribe({
+    next:(data)=>{
+      console.log(data);
+      this.user=data
+      console.log(this.user);
+    },
+    error(err) {
+      console.log(err)
+      
+    },
+  })}
   ngOnInit(): void {
-    
+    this.getCurrentUser();
   }
   ajouter(){
+    this.collocation.userId=this.user.id;
 
     this.collocationservice.ajouter(this.collocation).subscribe(
       (res)=>{

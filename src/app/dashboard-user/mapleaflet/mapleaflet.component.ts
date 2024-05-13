@@ -58,9 +58,9 @@ export class MapleafletComponent implements OnInit {
   private initMap(): void {
     this.map = L.map('map', {
       center: [36.63316209558658, 9.830017089843752],
-      zoom: 14
+      zoom: 20
     });
-    //      center: [48.20807, 16.37320],
+    //     center: [48.20807, 16.37320],
 
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -166,7 +166,7 @@ this.adminService.setData({
       
       waypointMarker.off('click');
 
-       waypointMarker.on('mouseover', () => {
+     /*  waypointMarker.on('mouseover', () => {
         const popupContent = `<div>
       
         <p><strong>Designation:</strong> ${data.designation}</p>
@@ -192,7 +192,7 @@ this.adminService.setData({
 
     });
   }
-      });
+      });*/
     }
   });
  

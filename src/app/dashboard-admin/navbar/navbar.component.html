@@ -25,19 +25,25 @@
                                     
                                 </li>
                                 <li class="nav-item">
-                                    <a  routerLink="/dashboard/listroom" aria-label="Toggle navigation">MeetingRoom</a>
+                                    <a  routerLink="/dashboardAdmin/listCollocationAd" aria-label="Toggle navigation">Collocations</a>
                                 </li>
-                                
+                                <li class="nav-item">
+                                    <a  routerLink="/dashboardAdmin/listCovoiturageAd" aria-label="Toggle navigation">Covoiturage</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a  routerLink="/dashboardAdmin/claims" aria-label="Toggle navigation">Claims</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a  routerLink="/dashboardAdmin/stat" aria-label="Toggle navigation">Statistiques</a>
+                                </li>
                             </ul>
                         </div> <!-- navbar collapse -->
                         <div class="login-button">
                             <ul>
-                                <li class="nav-item">
-                                    <a routerLink ="/dashboard/add-room">Ad Room</a>
-                                </li>
+                               
 
                                 <li>
-                                    <a><i class="lni lni-enter" ></i> LogOut</a>
+                                    <a><i class="lni lni-enter"(click)="logout()" ></i> LogOut</a>
                                                                  
                                 </li> 
                             </ul>

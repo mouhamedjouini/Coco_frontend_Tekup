@@ -16,20 +16,28 @@ import { ReclamtionComponent } from './dashboard-user/reclamtion/reclamtion.comp
 import { WebsocketComponent } from './dashboard-user/websocket/websocket.component';
 import { ClaimsComponent } from './dashboard-admin/claims/claims.component';
 import { StatComponent } from './dashboard-admin/stat/stat.component';
+import { ListcovoiturageAdComponent } from './dashboard-admin/listcovoiturage-ad/listcovoiturage-ad.component';
+import { ListcollocationAdComponent } from './dashboard-admin/listcollocation-ad/listcollocation-ad.component';
+import { authGuard } from './auth.guard';
+
+
 
 
 export const routes: Routes = [
-    { path: 'dashboardAdmin', component: DashboardAdminComponent, children:[
+    { path: 'dashboardAdmin',canActivate:[authGuard], component: DashboardAdminComponent, children:[
         {path:'claims', component : ClaimsComponent},
         {path:'stat', component:StatComponent},
+       {path: 'listCollocationAd', component: ListcollocationAdComponent},
+      {path :'listCovoiturageAd', component :ListcovoiturageAdComponent},
     ] },
-    { path: 'dashboardUser', component: DashboardUserComponent , children:[
+   
+    { path: 'dashboardUser',canActivate:[authGuard], component: DashboardUserComponent , children:[
         {path: 'Maps', component:MapleafletComponent},
         { path: 'add-collocation', component:AddCollocationComponent }, 
         { path: 'add-covoiturage', component:AddCovoiturageComponent }, 
         {path: 'listmeetcovoi', component: ListCovoiturageComponent},
         {path :'listcovoiturageUser', component :ListannonceuserComponent},
-
+        
         {path: 'listcollocation', component: ListCollocationComponent}, 
         {path:'Chattroomassitance', component: ChattroomAssitanceComponent},
         {path:'reclamtion', component:ReclamtionComponent},

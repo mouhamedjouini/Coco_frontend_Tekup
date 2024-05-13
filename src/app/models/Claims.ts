@@ -11,4 +11,5 @@ export class Claims{
     consultAt!:Date;
     user!:user;
     isDropdownOpen:boolean=false;
+    iduser!:any
 }

@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';;
 import { CovoiturageService } from '../../services/covoiturage.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
 export enum TypeCovoiturage {
   quotidien = 'quotidien',
   occasionnelle = 'occasionnelle'
@@ -16,6 +17,7 @@ export enum TypeCovoiturage {
   styleUrl: './add-covoiturage.component.css'
 })
 export class AddCovoiturageComponent implements OnInit {
+  user:any;
   covoiturage={
   
     "designation": "",
@@ -24,7 +26,7 @@ export class AddCovoiturageComponent implements OnInit {
     "lieu_depart": "",
     "nbrePlaceDisponible": 0 ,
     "typeCovoiturage": "",
-    "idUSEr": 1,
+    "idUSEr": 0,
  // typeCovoiturage: TypeCovoiturage.quotidien
 
   }
@@ -33,12 +35,24 @@ export class AddCovoiturageComponent implements OnInit {
     TypeCovoiturage.quotidien,
     TypeCovoiturage.occasionnelle
   ];    
-  constructor(private covoiturageService  : CovoiturageService , private router : Router){}
-
+  constructor(private covoiturageService  : CovoiturageService , private router : Router , private authService :AuthService){}
+  getCurrentUser(){
+  this.authService.getCurrentUser().subscribe({
+    next:(data)=>{
+      console.log(data);
+      this.user=data
+      console.log(this.user);
+    },
+    error(err) {
+      console.log(err)
+      
+    },
+  })}
   ngOnInit(): void {
-    
+    this.getCurrentUser()
   }
     ajouter(){
+      this.covoiturage.idUSEr=this.user.id;
       console.log(this.covoiturage)
      
       this.covoiturageService.ajouter(this.covoiturage).subscribe(

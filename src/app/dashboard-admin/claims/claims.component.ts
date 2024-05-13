@@ -16,6 +16,7 @@ import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 export class ClaimsComponent {
   constructor(private ClaimsService : ClaimsService){}
   allReclamation: Claims[] = [];
+  allsReclamation:any
   percentage!:Map<string, number>;
    claimTypes = ['CARPOLING', 'COLLOCATION', 'Other'];
    percentageMap = new Map();
@@ -57,6 +58,8 @@ export class ClaimsComponent {
         console.log(data)
         this.allReclamation = data.content; 
         this.totalItems = data.totalElements; 
+        this.allsReclamation=data.content
+        console.log(this.allsReclamation)
       });
   }
   onPageChange(page: number): void {
@@ -68,6 +71,7 @@ export class ClaimsComponent {
     claim.isDropdownOpen = !claim.isDropdownOpen;
   }
 statusclaim(id:number,status:string){
+  console.log(id+status)
   this.ClaimsService.statusClaims(id,status).subscribe(
     response => {
       

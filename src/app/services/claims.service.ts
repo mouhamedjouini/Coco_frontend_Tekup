@@ -16,10 +16,11 @@ export class ClaimsService {
       return this.httpClient.get<Claims>(`http://localhost:9093/findByUser/${id}`);
     }
   AddClaim(claim:Claims): Observable<Claims> {
-      return this.httpClient.post<Claims>('http://localhost:9093/addClaim', claim);
+      return this.httpClient.post<Claims>('http://localhost:9093/addClaims', claim);
     }
     statusClaims(id: number, statu:string): Observable<Claims> {
-      return this.httpClient.put<Claims>(`http://localhost:9093/statusClaims/${id}/${statu}`, null);
+      console.log("id"+id+"stat"+statu)
+      return this.httpClient.put<Claims>(`http://localhost:9093/statusClaims/${id}/${statu}`, Claims);
     }
     Delete(id: number) {
       return this.httpClient.delete(`http://localhost:9093/DeleteClaims/${id}`);

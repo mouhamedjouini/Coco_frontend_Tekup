@@ -91,19 +91,21 @@
           <thead class="table-light">
             <tr>
               <th>Title</th>
-              <th>Client name</th>
+            
               <th>Description</th>
               <th>Type</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
           </thead>
+         
+
           <tbody class="table-border-bottom-0">
-            <tr  *ngFor="let claim of allReclamation">
+            <tr  *ngFor="let claim of allsReclamation">
               <td>
                 <span class="fw-medium">{{claim.title}}</span>
               </td>
-              <td>{{claim.user.username}}</td>
+             
               <td>{{claim.description}}</td>
               <td>{{claim.typeClaim}}</td>
               <td><span class="badge bg-label-primary me-1"> <td>{{claim.statusClaims}}</td></span></td>

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-navbarus',
@@ -8,6 +8,14 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   templateUrl: './navbarus.component.html',
   styleUrl: './navbarus.component.css'
 })
-export class NavbarusComponent {
-
+export class NavbarusComponent implements OnInit {
+  constructor(private router: Router){}
+  ngOnInit(): void {
+   
+  }
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.clear(); 
+    this.router.navigateByUrl('/login')
+}
 }
