@@ -51,9 +51,9 @@ this.jwToken = data.headers.get('Authorization')!;
 this.authService.saveToken(this.jwToken);
 this.getCurrentUser()
 if(this.roles.includes('Admin')){
-  this.router.navigate(['/dashboardAdmin']);
+  this.router.navigate(['/dashboardAdmin/listCovoiturageAd']);
 }else{
-this.router.navigate(['/dashboardUser']);
+this.router.navigate(['/dashboardUser/Maps']);
 }
 },
 error: (err: any) => {

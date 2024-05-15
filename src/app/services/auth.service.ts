@@ -20,6 +20,14 @@ public roles!:string[];
   login(user:any){
     return this.http.post(this.url+'login',user , {observe:'response'});
   }
+  AddRole(username: string, role: string): Observable<any> {
+    const url = `${this.url}addRole/${username}/${role}`; 
+    return this.http.post<any>(url, null, { observe: 'response' });
+  }
+
+  getall(){
+    return this.http.get<any[]>(this.url+"all")
+  }
   saveToken(jwt:string){
     localStorage.setItem('jwt',jwt);
     this.token = jwt;

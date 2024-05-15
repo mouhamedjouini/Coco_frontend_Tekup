@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -25,6 +26,10 @@ export class CollocationService {
   }
   getbyid(id:any){
     return this.http.get(this.url+id)
+  }
+  getAnnoncesByUser(userId: number): Observable<any> {
+    const url = `${this.url}/CollocationbyUser/${userId}`; // URL complète avec path parameter
+    return this.http.get<any>(url);
   }
 
 }

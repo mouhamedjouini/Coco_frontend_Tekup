@@ -7,7 +7,7 @@
                 <div class="nav-inner">
                     <nav class="navbar navbar-expand-lg">
                         <a class="navbar-brand" href="index.html">
-                            <img src="assets/images/logo/logo.svg" alt="Logo">
+                            <img src="assets/images/logo/TEKUP.png" alt="Logo">
                         </a>
                         <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -23,8 +23,7 @@
                                   <ul class="sub-menu">
                                    <!--  <li><a routerLink ="/dashboardUser/Maps">Add</a></li>-->
                                     <li><a routerLink ="/dashboardUser/listmeetcovoi">List</a></li>
-                                  <!--  <li><a routerLink="/signup">Signup</a></li>-->
-                                 
+                                    <li><a [routerLink] ="['/dashboardUser/covoiturageUs',user]">Mes Annonces</a></li>
                                   </ul>
                                  
                                 </li>
@@ -34,6 +33,7 @@
                                   <li><a routerLink ="/dashboardUser/add-collocation">Add</a></li>
                                  
                                   <li><a routerLink ="/dashboardUser/listcollocation">listcollocation</a></li>
+                                  <li><a [routerLink] ="['/dashboardUser/collocationUs',user]">Mes Annonces</a></li>
                                 </ul>
                                 <li class="nav-item">
                                     <a routerLink="/dashboardUser/reclamtion">Claims</a>
@@ -41,8 +41,10 @@
                                 <li class="nav-item">
                                     <a routerLink="/dashboardUser/Chattroomassitance" >Chatroom  assistance</a>
                                 </li>
+                                
                               </ul>
-                            
+                
+                               
                         </div> <!-- navbar collapse -->
                        
                         <div class="login-button">

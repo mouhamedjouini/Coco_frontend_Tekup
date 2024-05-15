@@ -27,8 +27,8 @@ export class PopContentComponent  implements OnInit {
     nbrePlaceDisponible: 0,
     lieu_fin:'',
     typeCovoiturage: "",
-    idUSEr: 1,
- // typeCovoiturage: TypeCovoiturage.quotidien
+    idUSEr: 0,
+ 
     destinationLatitude:0,
    destinationLongitude : 0,
    departLatitude : 0,

@@ -24,8 +24,8 @@ export class CovoiturageService {
 getall(){
   return this.http.get<any[]>("http://localhost:9093/annoncecovoiturage/all")
 }
-supprimer(annonceId:any){
-  return this.http.delete(this.url+'/delete/'+annonceId)
+supprimer(id:any){
+  return this.http.delete(this.url+'/delete/'+id,)
 
 }
 modifier(id :any , annocecovoi : any){
@@ -49,5 +49,9 @@ getStatsByUsers() {
 
 getUserWithMostAnnouncements() {
   return this.http.get(this.url + 'userWithMostAnnouncements');
+}
+getAnnoncesByUser(userId: number): Observable<any> {
+  const url = `${this.url}/byUser/${userId}`; // URL complète avec path parameter
+  return this.http.get<any>(url);
 }
 }

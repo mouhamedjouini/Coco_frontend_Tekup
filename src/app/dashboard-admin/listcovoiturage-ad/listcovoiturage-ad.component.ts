@@ -15,23 +15,63 @@ import Swal from 'sweetalert2';
   styleUrl: './listcovoiturage-ad.component.css'
 })
 export class ListcovoiturageAdComponent   implements OnInit {
-  // public url='http://localhost:9093/'
+  deleteSuccessMessage: any;
   constructor( private router: Router , private list : CovoiturageService,  private reservationService: ReservationService){}
-  covoitu : any;
-
+  covoitu: any[] = []; // Liste de covoiturages
+  placesDepart: string[] = []; 
+  placesDestination: string[] = [];
   ngOnInit(): void {
     this.list.getall().subscribe(
-      (res)=>{
-        this.covoitu=res;
-        console.log(res)
-      },(err)=>{
-        console.log(err);
+      (res) => {
+        this.covoitu = res;
+        this.placesDepart = []; // Réinitialiser le tableau des lieux de départ
+        this.placesDestination = []; // Réinitialiser le tableau des lieux de destination
     
-        this.ngOnInit()
+        // Boucle pour chaque covoiturage
+        this.covoitu.forEach((covoiturage: any) => {
+          // Récupération du lieu de départ
+          if (covoiturage.departLatitude && covoiturage.departLongitude) {
+            this.list.getAddressFromCoordinates(covoiturage.departLatitude, covoiturage.departLongitude)
+              .subscribe((response: any) => {
+                if (response.features && response.features.length > 0) {
+                  const placeName = response.features[0].place_name; // Prendre le premier résultat
+                  this.placesDepart.push(placeName);
+                  console.log("Lieu de départ:", placeName);
+                } else {
+                  this.placesDepart.push('Lieu de départ inconnu');
+                }
+              }, (error) => {
+                console.error('Erreur lors de la récupération du lieu de départ:', error);
+                this.placesDepart.push('Erreur de géocodage');
+              });
+          } else {
+            this.placesDepart.push('Coordonnées de départ manquantes');
+          }
+    
+          // Récupération du lieu de destination
+          if (covoiturage.destinationLatitude && covoiturage.destinationLongitude) {
+            this.list.getAddressFromCoordinates(covoiturage.destinationLatitude, covoiturage.destinationLongitude)
+              .subscribe((response: any) => {
+                if (response.features && response.features.length > 0) {
+                  const placeName = response.features[0].place_name; // Prendre le premier résultat
+                  this.placesDestination.push(placeName);
+                  console.log("Lieu de destination:", placeName);
+                } else {
+                  this.placesDestination.push('Lieu de destination inconnu');
+                }
+              }, (error) => {
+                console.error('Erreur lors de la récupération du lieu de destination:', error);
+                this.placesDestination.push('Erreur de géocodage');
+              });
+          } else {
+            this.placesDestination.push('Coordonnées de destination manquantes');
+          }
+        });
+      },
+      (err) => {
+        console.error('Erreur lors de la récupération des données:', err);
       }
-      
-    )
-    
+    );
   }
   async afficherPopupReservation(annonceId: number) {
     const { value: placesReservees } = await Swal.fire({
@@ -58,12 +98,30 @@ export class ListcovoiturageAdComponent   implements OnInit {
       .subscribe(
         response => {
           Swal.fire('Succès', response.message, 'success');
+          this.ngOnInit()
         },
         error => {
           console.log(error)
-          Swal.fire('Erreur', 'Une erreur s\'est produite', 'error');
+        //  Swal.fire('Erreur', 'Une erreur s\'est produite', 'error');
+        this.ngOnInit()
         }
       );
   }
-}
+  deleteCovoiturage(id: any) {
+    // Call your service method to delete the collocation item by id
+    this.list.supprimer(id).subscribe(
+      (res) => {
+        // Handle success response or update UI as needed
+        console.log("Covoiturage deleted successfully");
+        this.deleteSuccessMessage = 'La Covoiturage a été supprimée avec succès.';
+        this.ngOnInit(); 
+      },
+      (err) => {
+        // Handle error response
+        console.error("Error deleting Covoiturage:", err);
+        this.deleteSuccessMessage = 'La Covoiturage a été supprimée avec succès.';
+        this.ngOnInit(); 
+      },
+    )}
+  }
 

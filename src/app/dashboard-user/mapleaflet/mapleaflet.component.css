@@ -17,7 +17,7 @@
     height: 100%;
     }
   img{
-    content :url("/src/assets/marker-icon-2x.png")
+    content :url("/assets/marker-icon.png")
   }
   .leaflet-control-button {
     background-color: #007bff;

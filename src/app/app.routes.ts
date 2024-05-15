@@ -19,6 +19,10 @@ import { StatComponent } from './dashboard-admin/stat/stat.component';
 import { ListcovoiturageAdComponent } from './dashboard-admin/listcovoiturage-ad/listcovoiturage-ad.component';
 import { ListcollocationAdComponent } from './dashboard-admin/listcollocation-ad/listcollocation-ad.component';
 import { authGuard } from './auth.guard';
+import { HomeComponent } from './home/home.component';
+import { ListUsersComponent } from './dashboard-admin/list-users/list-users.component';
+import { MesAnnonceColloComponent } from './dashboard-user/mes-annonce-collo/mes-annonce-collo.component';
+import { MesAnnonceCovoiComponent } from './dashboard-user/mes-annonce-covoi/mes-annonce-covoi.component';
 
 
 
@@ -29,7 +33,10 @@ export const routes: Routes = [
         {path:'stat', component:StatComponent},
        {path: 'listCollocationAd', component: ListcollocationAdComponent},
       {path :'listCovoiturageAd', component :ListcovoiturageAdComponent},
+      
+      {path :'listUsers', component :ListUsersComponent},
     ] },
+    {path:'home',component:HomeComponent},
    
     { path: 'dashboardUser',canActivate:[authGuard], component: DashboardUserComponent , children:[
         {path: 'Maps', component:MapleafletComponent},
@@ -42,7 +49,8 @@ export const routes: Routes = [
         {path:'Chattroomassitance', component: ChattroomAssitanceComponent},
         {path:'reclamtion', component:ReclamtionComponent},
 
-      
+        {path:'collocationUs/:id',component:MesAnnonceColloComponent},
+        {path:'covoiturageUs/:id',component:MesAnnonceCovoiComponent},
         {path:'updatecollocation',component:UpdateCollocationComponent} 
  
 
@@ -50,6 +58,6 @@ export const routes: Routes = [
 
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-    {path: '', redirectTo:'login', pathMatch: 'full'},
+    {path: '', redirectTo:'home', pathMatch: 'full'},
     
 ];

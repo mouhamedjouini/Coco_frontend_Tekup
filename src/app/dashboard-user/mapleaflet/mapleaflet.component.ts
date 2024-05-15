@@ -18,14 +18,27 @@ import Swal from 'sweetalert2';
 
 export class MapleafletComponent implements OnInit {
   private map: any;
+  user:any
   private routes: any = []; 
   @ViewChild('popupContainer', { read: ViewContainerRef }) popupContainer: ViewContainerRef | any;
   
   private startLatLng: L.LatLng | null = null;
   private endLatLng: L.LatLng | null = null;
   private currentRoute: L.Routing.Control | null = null;
-  constructor(private adminService : AuthService , private router:Router,private route:ActivatedRoute,private resolver: ComponentFactoryResolver , private  carppolingServiceService : CovoiturageService) {}
+  constructor(private adminService : AuthService , private router:Router,private route:ActivatedRoute,private resolver: ComponentFactoryResolver , private  carppolingServiceService : CovoiturageService,private authService : AuthService) {}
   @Output() er = new EventEmitter<any>();
+  getCurrentUser(){
+    this.authService.getCurrentUser().subscribe({
+      next:(data)=>{
+        console.log(data);
+        this.user=data
+        console.log(this.user);
+      },
+      error(err) {
+        console.log(err)
+        
+      },
+    })}
   ngOnInit(): void {
    
     this.carppolingServiceService.getall().subscribe((data)=>{
@@ -94,6 +107,8 @@ this.map.on('click', (event: L.LeafletMouseEvent) => {
       const routes = e.routes;
       const summary = routes[0].summary;
       console.log(summary);
+      const message = `Total distance is ${(summary.totalDistance / 1000).toFixed(2)} km and total time is ${Math.round((summary.totalTime /60) / 60)} hour`;
+      //Swal.fire('Success!', message, 'success');
       console.log('Total distance is ' + (summary.totalDistance / 1000).toFixed(2) + ' km and total time is ' + Math.round((summary.totalTime /60) / 60) + ' hour');
     });
 
