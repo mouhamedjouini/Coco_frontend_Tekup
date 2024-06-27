@@ -41,6 +41,19 @@
                       <textarea [(ngModel)]="collocation.descrption" name="descrption" rows="4" placeholder="Entrez la description" required></textarea>
                     </div>
                   </div>
+                  <div class="col-lg-6 col-12">
+                    <div class="upload-input">
+                        <input (change)="selectedimage($event)" type="file" id="upload" name="upload" required>
+                        <label for="upload" class="text-center content">
+                            <span class="text">
+                             <!--   <span class="d-block mb-15">Drop files anywhere to Upload</span>
+                                <span class="mb-15 plus-icon"><i class="lni lni-plus"></i></span>
+                                <span class="main-btn d-block btn-hover">Select File</span>
+                                <span class="d-block">Maximum upload file size 10Mb</span>-->
+                            </span>
+                        </label>
+                    </div>
+                </div>
                   <div class="col-12">
                     <div class="form-group">
                       <label>Montant*</label>

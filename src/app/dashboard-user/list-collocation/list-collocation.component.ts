@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
   styleUrl: './list-collocation.component.css'
 })
 export class ListCollocationComponent  implements OnInit {
+  public url='http://localhost:9093/'
   constructor( private router: Router , private list : CollocationService){}
   collocation : any;
   deleteSuccessMessage: string | null = null;
@@ -41,5 +42,12 @@ export class ListCollocationComponent  implements OnInit {
       }
     );
   }
-  
+  formData: FormData = new FormData();
+
+  onFileSelected(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.formData.append('image', file);
+    }
+  }
 }

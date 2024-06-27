@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { user } from '../../models/User';
+import { AnnonceCollocation } from '../../models/AnnonceCollocation';
+import { DomSanitizer } from '@angular/platform-browser';
 
 export enum TypeLogement {
   appartement = 'appartement',
@@ -27,12 +29,14 @@ export class AddCollocationComponent implements OnInit {
     "date_dispo": "",
     "nbre_chmbre": 0,
     "descrption": "",
+    imageModels:[],
     "nbre_person": 0,
     "typeLogement": "",
     "typeAnnoColloc": "",
     "userId": 0,
     "montant": 0
   }
+  image : any;
   user:any 
   typeLogementOptions:TypeLogement[]=[
     TypeLogement.appartement,
@@ -43,7 +47,7 @@ export class AddCollocationComponent implements OnInit {
     TypeAnnoColloc.full_recent,
     TypeAnnoColloc.room_sharing
   ];
-  constructor(private collocationservice  : CollocationService , private router : Router,private authService :AuthService){}
+  constructor(private collocationservice  : CollocationService , private router : Router,private authService :AuthService, private sannitizer: DomSanitizer){}
   getCurrentUser(){
   this.authService.getCurrentUser().subscribe({
     next:(data)=>{
@@ -59,13 +63,32 @@ export class AddCollocationComponent implements OnInit {
   ngOnInit(): void {
     this.getCurrentUser();
   }
+  selectedFile: File | undefined;
+  productData: AnnonceCollocation = {} as AnnonceCollocation;
+  quantity: number = 0;
+  files: File[] = [];
+  selectedimage(event:any){
+    this.image=event.target.files[0];
+  console.log(event.target.files[0]);
+  
+  }
+  /*
   ajouter(){
     this.collocation.userId=this.user.id;
-
-    this.collocationservice.ajouter(this.collocation).subscribe(
+    let f =new FormData();
+    f.append('date_dispo',this.collocation.date_dispo);
+    f.append('nbre_chmbre',this.collocation.nbre_chmbre.toString())
+    f.append('descrption',this.collocation.descrption)
+    f.append('nbre_person',this.collocation.nbre_person.toString())
+    f.append('image',this.image);
+    f.append('typeLogement',this.collocation.typeLogement)
+    f.append('typeAnnoColloc',this.collocation.typeAnnoColloc)
+    f.append('montant', this.collocation.montant.toString())
+    console.log(f)
+    this.collocationservice.ajouter(f).subscribe(
       (res)=>{
-        console.log(this.collocation.descrption);
-        console.log(this.collocation.date_dispo);
+       // console.log(this.collocation.descrption);
+        //console.log(this.collocation.date_dispo);
         console.log(res);
         this.router.navigate(['dashboardUser/listcollocation'])
         },
@@ -76,6 +99,25 @@ export class AddCollocationComponent implements OnInit {
       )
       ;
       }
+      */
+      ajouter() {
+        this.collocation.userId = this.user.id;
+        let f = new FormData();
+        f.append('collocation', new Blob([JSON.stringify(this.collocation)], { type: 'application/json' }));
+        if (this.image) {
+            f.append('imageFile', this.image);
+        }
+        
+        this.collocationservice.ajouter(f).subscribe(
+            (res) => {
+                console.log(res);
+                this.router.navigate(['dashboardUser/listcollocation']);
+            },
+            (err) => {
+                console.log(err);
+            }
+        );
+    }
       logout(){
         this.router.navigate(['/login'])
       }
