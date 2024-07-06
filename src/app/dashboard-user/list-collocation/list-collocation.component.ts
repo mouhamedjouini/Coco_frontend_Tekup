@@ -42,12 +42,12 @@ export class ListCollocationComponent  implements OnInit {
       }
     );
   }
-  formData: FormData = new FormData();
+ /* formData: FormData = new FormData();
 
   onFileSelected(event: any) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.formData.append('image', file);
     }
-  }
+  }*/
 }

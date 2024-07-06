@@ -47,7 +47,8 @@ export class AddCollocationComponent implements OnInit {
     TypeAnnoColloc.full_recent,
     TypeAnnoColloc.room_sharing
   ];
-  constructor(private collocationservice  : CollocationService , private router : Router,private authService :AuthService, private sannitizer: DomSanitizer){}
+  constructor(private collocationservice  : CollocationService ,
+     private router : Router,private authService :AuthService, private sannitizer: DomSanitizer){}
   getCurrentUser(){
   this.authService.getCurrentUser().subscribe({
     next:(data)=>{
@@ -64,9 +65,9 @@ export class AddCollocationComponent implements OnInit {
     this.getCurrentUser();
   }
   selectedFile: File | undefined;
-  productData: AnnonceCollocation = {} as AnnonceCollocation;
-  quantity: number = 0;
-  files: File[] = [];
+  //productData: AnnonceCollocation = {} as AnnonceCollocation;
+  //quantity: number = 0;
+  //files: File[] = [];
   selectedimage(event:any){
     this.image=event.target.files[0];
   console.log(event.target.files[0]);
